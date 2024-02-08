@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Проверка пользователя Windows</title>
+</head>
+
+<body>
+    <h2>Проверка наличия пользователя в Windows</h2>
+    <form id="userCheckForm">
+        <label for="userName">Введите имя пользователя:</label>
+        <input type="text" id="userName" name="userName">
+        <br>
+        <button type="submit">Проверить</button>
+    </form>
+    <script>
+        document.getElementById('userCheckForm').onsubmit = function (event) {
+            event.preventDefault();
+            const userName = document.getElementById('userName').value;
+
+            fetch('/check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userName: userName }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.body.innerHTML = `<h2>${data.message}</h2><button onclick="window.location.reload()">Назад</button>`;
+                })
+                .catch(error => {
+                    console.error('Произошла ошибка:', error);
+                    alert('Произошла ошибка при обработке вашего запроса. Пожалуйста, проверьте консоль, чтобы увидеть подробности.');
+                });
+        };
+    </script>
+</body>
+
+</html>

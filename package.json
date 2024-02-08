@@ -1,0 +1,19 @@
+{
+  "name": "windows-user-check",
+  "version": "1.0.0",
+  "description": "Check a Windows user exists using Node.js and C++ addon.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node-gyp configure && node-gyp rebuild",
+    "rebuild": "npm install && npm run build"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-addon-api": "^3.2.1",
+    "open": "^10.0.3"
+  },
+  "gypfile": true,
+  "author": "Svetlichniy D.O.",
+  "license": "ISC"
+}
